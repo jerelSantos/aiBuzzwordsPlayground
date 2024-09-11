@@ -3,8 +3,6 @@ from firecrawl import FirecrawlApp
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 
-url = "https://www.happyscribe.com/public/the-joe-rogan-experience/jre-mma-show-162-with-belal-muhammad"
-
 def getDialogue(url):
     # initialize firecrawl with API key from env file
     load_dotenv()
@@ -13,8 +11,8 @@ def getDialogue(url):
 
     # scrape website via url using firecrawl
     scrape_status = fc.scrape_url(
-    url, 
-    params={'formats': ['markdown', 'html']}
+        url, 
+        params={'formats': ['markdown', 'html']}
     )
 
     # use BeautifulSoup to get dialogue from html
@@ -23,8 +21,16 @@ def getDialogue(url):
 
     # store each dialogue text as an element in dialogue[]
     dialogue = []
-    for div in hsp_paragraphs:
+    for i, div in enumerate(hsp_paragraphs):
         paragraph = div.find('p')
-        dialogue.append(paragraph.get_text())
+
+        # insert (1) or (2) depending on speaker
+        if i % 2 == 0:
+            line = "(1): " + paragraph.get_text()
+        else:
+            line = "(2): " + paragraph.get_text()
+        
+        dialogue.append(line)
+
 
     return dialogue
