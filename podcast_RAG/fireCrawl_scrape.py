@@ -15,6 +15,8 @@ def getDialogue(url):
         params={'formats': ['markdown', 'html']}
     )
 
+    print("scraped url: {}".format(scrape_status['metadata']['title']))
+
     # use BeautifulSoup to get dialogue from html
     soup = BeautifulSoup(scrape_status['html'], 'html.parser')
     hsp_paragraphs = soup.find_all('div', class_='hsp-paragraph')
@@ -32,5 +34,5 @@ def getDialogue(url):
         
         dialogue.append(line)
 
-
+    print("Dialogue successfully scraped: {}".format(dialogue[0]))
     return dialogue
