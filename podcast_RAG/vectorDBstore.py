@@ -2,16 +2,22 @@ import os
 import time
 from dotenv import load_dotenv
 from fireCrawl_scrape import getDialogue
-from random import randrange, choice
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.documents import Document
 from pinecone import Pinecone, ServerlessSpec
+from random import randrange, choice
 from uuid import uuid4
 
 urls = [ "https://www.happyscribe.com/public/the-joe-rogan-experience/jre-mma-show-155-with-max-holloway",
         "https://www.happyscribe.com/public/the-joe-rogan-experience/2195-andrew-huberman",
-        "https://www.happyscribe.com/public/the-joe-rogan-experience/jre-mma-show-162-with-belal-muhammad"
+        "https://www.happyscribe.com/public/the-joe-rogan-experience/jre-mma-show-162-with-belal-muhammad",
+        "https://www.happyscribe.com/public/the-diary-of-a-ceo-with-steven-bartlett/andrew-huberman-you-must-control-your-dopamine-the-shocking-truth-about-cold-showers",
+        "https://www.happyscribe.com/public/the-joe-rogan-experience/2187-adam-sandler",
+        "https://www.happyscribe.com/public/lex-fridman-podcast-artificial-intelligence-ai/139-andrew-huberman-neuroscience-of-optimal-performance",
+        "https://www.happyscribe.com/public/the-joe-rogan-experience/1527-david-blaine",
+        "https://www.happyscribe.com/public/the-joe-rogan-experience/1532-mike-tyson",
+        "https://www.happyscribe.com/public/the-diary-of-a-ceo-with-steven-bartlett/the-muscle-building-expert-creatine-loading-is-a-waste-of-time-they-re-lying-to-you-about-workout-hours-dr-michael-israetel"
 ]
 
 load_dotenv()
@@ -23,8 +29,8 @@ for url in urls:
         # get dialogue from transcript from given url
         dialogue = getDialogue(url)
 
-        # get 25 random segments of the dialogue, ranging from length 2, 4, or 6
-        for i in range(25):
+        # get 100 random segments of the dialogue, ranging from length 2, 4, or 6
+        for i in range(100):
                 start = randrange(len(dialogue[:-6]))
                 end = choice([2, 4, 6])
                 dialogue_segments.append(" ".join(dialogue[start:start + end]))

@@ -34,5 +34,4 @@ def getDialogue(url):
         
         dialogue.append(line)
 
-    print("Dialogue successfully scraped: {}".format(dialogue[0]))
     return dialogue

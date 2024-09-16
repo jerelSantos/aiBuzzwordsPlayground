@@ -9,12 +9,13 @@ RAG implementation:
     1. search vectorDB for relevant info
     2. use agent to verify if information from vectorDB actually matches
 
-    WHAT IF:
+    In the future:
         *(RAG implementation) I train an agent on random chunks from a variety of podcasts.
         This agent will be used to look through transcripts of dialogue in podcasts.
         The agent will identify "good" sections of conversation and then will store it into the vectorDB.
         This automates training data that our RAG podcast bot can use to generate good podcast scripts.
         
+        * I have an LLM label podcast segments with tags so during retrieval, the RAG LLM can get specific parts of the podcast.
 
 sample podcast script urls:
     JRE MMA ft. Belal Muhammad: https://www.happyscribe.com/public/the-joe-rogan-experience/jre-mma-show-162-with-belal-muhammad
