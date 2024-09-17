@@ -121,7 +121,11 @@ Here's the output of solution 1:
 **[OUTRO MUSIC FADES OUT]**
 ```
 ## Closing thoughts
-Yeah the result is still buns. It seems that instead of taking the 
+Yeah the result is still buns. It seems that instead of taking the information provided from the vectorDB to enhance the conversational tone, it's just using it to provide more relevant information. Which is what RAG is supposed to do (stupid, Jerel). <br/><br/>
+
+I'm thinking of a further method where I have a cheaper model (maybe like Ollama) to label each segment I take from the podcast and tag them with labels (like intro, question, topic change, etc.) then I'll use RAG with these labels to hopefully yield a better result. <br><br/>
+
+However, I do like the result we got here. I could also develop an internet scraping agent that will utillize tool calling to feed recent and relevant info into the podcast script.
 
 # 🤓 Solution 2: There is no Podcast
 [podcast_RAG/prompts.py](podcast_RAG/prompts.py)
@@ -178,4 +182,4 @@ Here's the output with the new prompt (and RAG):
 ```
 
 ## Closing Thoughts
-I think both the podcast and conversational method have their own choices. I think in the future, I'll allow the user to dictate what tone they want, and from there I'll place the keywords they choose into the prompt strategically.
+I think both the podcast and conversational method have their own pros and cons. In the future, I'll allow the user to dictate what tone they want (along with other keywords), and from there I'll place the keywords they choose into the prompt strategically.
