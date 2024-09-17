@@ -23,9 +23,9 @@ And the following is the prompt the model is given:
 ```
 Obviously my prompt engineering leaves much to be desired, but even with high level prompt engineering, this (probably) won't solve the issue of price. So let's get into some solutions!
 
-## 🤓 Solution 1: RAG
+# 🤓 Solution 1: RAG
 [podcast_RAG directory](/podcast_RAG/)
-### Solution Summary:
+## Solution Summary:
 Retrieval-Augmented Generation (RAG) is the idea of providing additional context in the prompt when communicating with a model. For our usecase, we will provide OpenAI's ChatGPT model with segments of real podcasts so it will learn what good conversation is in order to apply it to the podcast script it gives us. <br/> <br/>
 The general workflow will look like this:
 <ol>
@@ -72,7 +72,7 @@ Now generate a podcast script based on the following topic:
 """
 ```
 
-### Aaaand the result is
+## 🔬 And the result is:
 [basic_rag_output.txt](podcast_RAG/outputs/basic_rag_output.txt)<br>
 Here's the output of solution 1:
 ```
@@ -120,3 +120,62 @@ Here's the output of solution 1:
 
 **[OUTRO MUSIC FADES OUT]**
 ```
+## Closing thoughts
+Yeah the result is still buns. It seems that instead of taking the 
+
+# 🤓 Solution 2: There is no Podcast
+[podcast_RAG/prompts.py](podcast_RAG/prompts.py)
+## Solution Summary:
+This one isn't that complicated. We just adjust the prompt to produce a (hopefully) better solution. <br/><br/>
+
+The big problem here is that the podcast script still sounds like the guest info dumping onto the host. Maybe we can completely throw out any mentions of "podcast" from the prompt and prompt the model to make just a conversation between two friends. This way, the conversation will sound more natural? <br/><br/>
+
+Here's the new system context:
+```
+You will create a transcript of a conversation between two people, person (2) who is an expert on a given topic and
+person (1) who is interested in the topics person (2) is an expert in. Keep the conversation between the two people relaxed and informal. It should sound like two friends just casually talking. The conversation should NOT sound like a question and answer panel.
+           
+You will be provided with examples of good conversational segments. You should mimic their flow, tone, and engagement style, while applying the topic at hand. Use the examples as a guide for structure and natural transitions.
+```
+
+And here's the new prompt:
+```python
+f"""
+Here are the examples of good conversational segements (delimited in <segments> XML tags). There are two speakers indicated by '(1)' and '(2)':
+<segments>{retrieved_segments}</segments>
+
+The topics discussed in the following pdf (delimited by <pdf> XML tags) are the topics that person (2) is an expert on:
+<pdf>{pdf_scrape}</pdf>
+"""
+```
+## 🔬 And the result is:
+[conversation_output_RAG.txt](podcast_RAG/outputs/conversation_output_RAG.txt)<br/><br/>
+Here's the output with the new prompt (and RAG):
+```
+(1): So, I’ve been thinking about how fighters approach their strategy in a match. Like, do you think their performance in the first couple of rounds really sets the tone for the rest of the fight?
+
+(2): Oh, absolutely! It’s fascinating how that works. I’ve looked into it a bit, and it turns out that the performance in the first two rounds doesn’t really dictate how they’ll do in the third round. It’s more about how they react to their earlier performance.
+
+(1): Really? So, if they do well in the first two rounds, it doesn’t guarantee they’ll keep that momentum going?
+
+(2): Exactly! If they have a good first round, they might actually play it safe in the third. It’s like they’re thinking, “I’ve got a lead, let’s not mess this up.” On the flip side, if they’re behind, they might take more risks to try and turn things around.
+
+(1): That makes sense. It’s like a psychological game as much as a physical one. So, what about rematches? Do fighters change their strategies based on what happened the first time?
+
+(2): Oh, for sure! Interestingly, the performance in the original fight is a good predictor of how they’ll do in the rematch, but the actual outcome doesn’t always follow. Like, if a fighter performed well but lost due to bad luck, they’re often more likely to win the rematch.
+
+(1): That’s wild! So, it’s almost like they learn from their mistakes, but the outcome of the first fight doesn’t really matter as much as how they fought?
+
+(2): Exactly! It’s all about adapting and learning. Fighters can take those lessons and adjust their strategies for the rematch. It’s a whole different ball game.
+
+(1): I love that! It’s like a chess match, but with punches. So, do you think this affects how fans view the fighters? Like, do they get too caught up in the win-loss record?
+
+(2): Definitely! Fans often focus on the outcomes rather than the nuances of the performance. They might not realize that a fighter could have had a stellar performance but just got caught at the wrong moment. It’s all about the context.
+
+(1): Right! It’s like, “Hey, that was a great fight, even if they lost!” I guess it’s all part of the drama that makes MMA so exciting.
+
+(2): Exactly! The unpredictability is what keeps everyone on the edge of their seats. You never know how a fighter will adapt or what they’ll bring to the rematch. It’s all part of the sport’s charm.
+```
+
+## Closing Thoughts
+I think both the podcast and conversational method have their own choices. I think in the future, I'll allow the user to dictate what tone they want, and from there I'll place the keywords they choose into the prompt strategically.

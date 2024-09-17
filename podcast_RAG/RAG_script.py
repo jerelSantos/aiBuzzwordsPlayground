@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from pinecone import Pinecone
+from prompts import get_conversation_prompt, get_podcast_prompt
 
 pdf_scrape = """I examine the incentives of professional mixed martial artists and how they influence the
 strategies of the fighters in high profile competitions. Using data collected from hundreds of
@@ -47,19 +48,7 @@ def retrieve_relevant_segments(pdf_topic):
 retrieved_segments = retrieve_relevant_segments(pdf_scrape)
 
 # generate prompt using retrieved_segments and pdf_scrape
-prompt = [("system", """You will create a podcast script. You will be provided with examples of good conversational segments.
-                     You should mimic their flow, tone, and engagement style, while applying the topic at hand.
-                     Use the examples as a guide for structure and natural transitions."""
-           ),
-("human", f""" 
-Using the examples provided, generate a natural and engaging conversation between a host and a guest. The host should ask insightful questions, prompting the guest to share personal experiences and insights. Keep the flow dynamic and avoid too much technical exposition.
-
-Here are the example conversational segements (delimited in <segments> XML tags). There are two speakers indicated by '(1)' and '(2)':
-<segments>{retrieved_segments}</segments>
-
-Now generate a podcast script based on the following topic:
-<pdf>{pdf_scrape}</pdf>
-""")]
+prompt = get_conversation_prompt(retrieved_segments, pdf_scrape)
 
 # setup chatgpt 4o and use prompt to generate podcast script
 llm = ChatOpenAI(
