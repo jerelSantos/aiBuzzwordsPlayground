@@ -32,7 +32,7 @@ for url in urls:
         # get 100 random segments of the dialogue, ranging from length 2, 4, or 6
         for i in range(100):
                 start = randrange(len(dialogue[:-6]))
-                end = choice([2, 4, 6])
+                end = choice([6, 8, 10])
                 dialogue_segments.append(" ".join(dialogue[start:start + end]))
 
 print("dialogue successfully segmented: {}".format(dialogue_segments[0]))
@@ -65,7 +65,7 @@ vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 documents = []
 for segment in dialogue_segments:
-      new_doc = Document(page_content=segment)
+      new_doc = Document(page_content=segment, metadata={"text": segment})
       documents.append(new_doc)
 
 uuids = [str(uuid4()) for _ in range(len(documents))]

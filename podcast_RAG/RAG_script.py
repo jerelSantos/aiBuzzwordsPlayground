@@ -35,11 +35,11 @@ def retrieve_relevant_segments(pdf_topic):
     results = index.query(
         vector=embedded_pdf_topic,
         top_k=10,
-        include_values=True
+        include_metadata=True
     )
 
     # get vector values from results and return it
-    segments = [match['values'] for match in results['matches']]
+    segments = [match['metadata']['text'] for match in results['matches']]
 
     return segments
 
@@ -47,30 +47,30 @@ def retrieve_relevant_segments(pdf_topic):
 retrieved_segments = retrieve_relevant_segments(pdf_scrape)
 
 # generate prompt using retrieved_segments and pdf_scrape
-prompt = [("system", """You will create a podcast script. You will be provided with examples of good conversational segments (delimited in <vector> XML tags).
+prompt = [("system", """You will create a podcast script. You will be provided with examples of good conversational segments.
                      You should mimic their flow, tone, and engagement style, while applying the topic at hand.
                      Use the examples as a guide for structure and natural transitions."""
            ),
 ("human", f""" 
 Using the examples provided, generate a natural and engaging conversation between a host and a guest. The host should ask insightful questions, prompting the guest to share personal experiences and insights. Keep the flow dynamic and avoid too much technical exposition.
 
-Example podcast segments:
-<vector>{retrieved_segments}</vector>
+Here are the example conversational segements (delimited in <segments> XML tags). There are two speakers indicated by '(1)' and '(2)':
+<segments>{retrieved_segments}</segments>
 
 Now generate a podcast script based on the following topic:
 <pdf>{pdf_scrape}</pdf>
 """)]
 
 # setup chatgpt 4o and use prompt to generate podcast script
-# llm = ChatOpenAI(
-#     model="gpt-4o-mini-2024-07-18",
-#     temperature=0
-# )
-# print("Prompting OpenAI...")
-# response = llm.invoke(prompt)
+llm = ChatOpenAI(
+    model="gpt-4o-mini-2024-07-18",
+    temperature=0
+)
+print("Prompting OpenAI...")
+response = llm.invoke(prompt)
 
-# print(response)
+print(response)
 
-# text_file = open("basic_rag_output2.txt", "w")
-# text_file.write(response.content)
-# text_file.close()
+text_file = open("basic_rag_output2.txt", "w")
+text_file.write(response.content)
+text_file.close()
