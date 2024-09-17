@@ -46,6 +46,7 @@ def retrieve_relevant_segments(pdf_topic):
 
 # use retrieve_relevant_segments() function to do exactly that
 retrieved_segments = retrieve_relevant_segments(pdf_scrape)
+retrieved_segments = "\n\n".join(retrieved_segments)
 
 # generate prompt using retrieved_segments and pdf_scrape
 prompt = get_conversation_prompt(retrieved_segments, pdf_scrape)
