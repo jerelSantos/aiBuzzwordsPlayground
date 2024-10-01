@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from pinecone import Pinecone
-from prompts import get_conversation_prompt, get_podcast_prompt
+from prompts import get_conversation_prompt, get_podcast_prompt, ssml_prompt
 
 pdf_scrape = """I examine the incentives of professional mixed martial artists and how they influence the
 strategies of the fighters in high profile competitions. Using data collected from hundreds of
@@ -56,11 +56,20 @@ llm = ChatOpenAI(
     model="gpt-4o-mini-2024-07-18",
     temperature=0
 )
-print("Prompting OpenAI...")
+print("Prompting OpenAI for script...")
 response = llm.invoke(prompt)
+print("Done!")
 
-print(response)
+text_file = open("basic_rag_output.txt", "w")
+text_file.write(response.content)
+text_file.close()
 
-text_file = open("basic_rag_output2.txt", "w")
+# use OpenAI to add SSML tags to the conversation
+prompt = ssml_prompt(response.content)
+print("Prompting OpenAI to add SSML tags...")
+response = llm.invoke(prompt)
+print("Done!")
+
+text_file = open("ssml_tags.txt", "w")
 text_file.write(response.content)
 text_file.close()
