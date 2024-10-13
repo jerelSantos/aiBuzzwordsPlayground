@@ -12,4 +12,3 @@ def llm1_outline_prompt(pdf_scrape):
     ))]
 
     return outline
-
