@@ -17,8 +17,9 @@ pc_api_key = os.getenv('PINECONE_API_KEY')
 lc_api_key = os.getenv('LANGCHAIN_API_KEY')
 ggl_api_key = os.getenv('GOOGLE_API_KEY')
 
-# initialize openai embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=oai_api_key, model='text-embedding-3-small')
+# initialize openai from langchain_openai
+embeddings = OpenAIEmbeddings(openai_api_key=oai_api_key, model='text-embedding-3-small') 
+llm = ChatOpenAI(api_key=oai_api_key, model="gpt-4o-mini-2024-07-18")
 
 # initialize pinecone
 # pc = Pinecone(api_key=pc_api_key)
@@ -35,14 +36,13 @@ embeddings = OpenAIEmbeddings(openai_api_key=oai_api_key, model='text-embedding-
 # vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 # node 1 - LLM_1: generate outline of podcast script
-llm = ChatOpenAI(api_key=oai_api_key, model="gpt-4o-mini-2024-07-18")
 prompt1 = PromptTemplate.from_template("The following is text extracted from a pdf file (delimited by <pdf> XML tags). "
                                        "Please generate an outline for a podcast episode based on the topics from the pdf. "
                                        "The outline should include 3-5 key topics that flow naturally into one another, " 
                                        "with a focus on maintaining audience engagement. "
                                        "\n--------------PDF--------------\n{pdf}\n--------------END PDF--------------"
                                        "Be sure to only include the outline in your response, since I am directly importing your response into another LLM to revise.")
-chain1 = prompt1 | llm | StrOutputParser()
+chain1 = prompt1 | llm | StrOutputParser() # basic chain for node 1: prompt -> llm -> string output
 
 # node 2 - LLM_2: fill in dialogue segments of podcast outline
 prompt2 = PromptTemplate.from_template("Using the following outline:" 
@@ -51,19 +51,19 @@ prompt2 = PromptTemplate.from_template("Using the following outline:"
                                        "Transitions between each topic should be seamless. The host should ask engaging, open-ended questions, " 
                                        "and the guest should provide detailed yet conversational responses. Keep the tone light and accessible."
                                        "Be sure to only include the script in your response, since I am directly importing your response into another LLM to revise.")
-chain2 = prompt2 | llm | StrOutputParser()
+chain2 = prompt2 | llm | StrOutputParser() # basic chain for node 2: output of node1 -> llm -> string output
 
 # node 3 - LLM_3: enhance transitions of the podcast script
 # prompt3 = PromptTemplate.from_template("Given the following script for a podcast: \n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n Please enhance the transitions between each topic. Ensure each transition feels natural and engaging, avoiding repetitive phrases like 'moving on' or 'next.' Use conversational cues that keep the audience engaged.")
 # chain3 = prompt3 | llm | StrOutputParser()
 
 # node 4 - LLM_4: enhance the overall tone of the podcast script
-prompt4 = PromptTemplate.from_template("Review the following script for a podcast: "
+prompt3 = PromptTemplate.from_template("Review the following script for a podcast: "
                                        "\n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n " 
                                        "Please polish the tone to make it more engaging. Add occasional humor, rhetorical questions, " 
                                        "or personal anecdotes where appropriate to make the conversation feel more human and lively."
                                        "Be sure to only include the script in your response, since I am directly importing your response into another LLM to revise.")
-chain4 = prompt4 | llm | StrOutputParser()
+chain3 = prompt3 | llm | StrOutputParser() # basic chain for node 3: output of node2 -> llm -> string output
 
 # get example pdf 'bodybuilding.txt' (hardcoded):
 with open('bodybuilding.txt', 'r', encoding="utf8") as file:
@@ -71,5 +71,5 @@ with open('bodybuilding.txt', 'r', encoding="utf8") as file:
     file.close()
 
 # assemble and call final LLM chain
-final_chain = chain1 | chain2 | chain4
-final_chain.invoke({"pdf": pdf_scrape})
+final_chain = chain1 | chain2 | chain3 # final chain goes: node1 -> node2 -> node3
+final_chain.invoke({"pdf": pdf_scrape}) # run the chain (output is on langsmith)
