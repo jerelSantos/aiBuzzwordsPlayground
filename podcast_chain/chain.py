@@ -40,12 +40,12 @@ prompt1 = PromptTemplate.from_template("The following is text extracted from a p
 chain1 = prompt1 | llm | StrOutputParser()
 
 # node 2 - LLM_2: fill in dialogue segments of podcast outline
-prompt2 = PromptTemplate.from_template("Using the following outline: \n--------------OUTLINE--------------\n{outline}\n--------------END OUTLINE--------------\n Please generate a conversational podcast script where a host and a guest discuss each topic. The host should ask engaging, open-ended questions, and the guest should provide detailed yet conversational responses. Keep the tone light and accessible.")
+prompt2 = PromptTemplate.from_template("Using the following outline: \n--------------OUTLINE--------------\n{outline}\n--------------END OUTLINE--------------\n Please generate a conversational podcast script where a host and a guest discuss each topic. Transitions between each topic should be seamless. The host should ask engaging, open-ended questions, and the guest should provide detailed yet conversational responses. Keep the tone light and accessible.")
 chain2 = prompt2 | llm | StrOutputParser()
 
 # node 3 - LLM_3: enhance transitions of the podcast script
-prompt3 = PromptTemplate.from_template("Given the following script for a podcast: \n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n Please enhance the transitions between each topic. Ensure each transition feels natural and engaging, avoiding repetitive phrases like 'moving on' or 'next.' Use conversational cues that keep the audience engaged.")
-chain3 = prompt3 | llm | StrOutputParser()
+# prompt3 = PromptTemplate.from_template("Given the following script for a podcast: \n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n Please enhance the transitions between each topic. Ensure each transition feels natural and engaging, avoiding repetitive phrases like 'moving on' or 'next.' Use conversational cues that keep the audience engaged.")
+# chain3 = prompt3 | llm | StrOutputParser()
 
 # node 4 - LLM_4: enhance the overall tone of the podcast script
 prompt4 = PromptTemplate.from_template("Review the following script for a: \n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n Please polish the tone to make it more engaging. Add occasional humor, rhetorical questions, or personal anecdotes where appropriate to make the conversation feel more human and lively.")
@@ -57,5 +57,5 @@ with open('bodybuilding.txt', 'r', encoding="utf8") as file:
     file.close()
 
 # assemble and call final LLM chain
-final_chain = chain1 | chain2 | chain3 | chain4
-print(final_chain.invoke({"pdf": pdf_scrape}))
+final_chain = chain1 | chain2 | chain4
+final_chain.invoke({"pdf": pdf_scrape})
