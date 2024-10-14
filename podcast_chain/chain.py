@@ -36,11 +36,21 @@ embeddings = OpenAIEmbeddings(openai_api_key=oai_api_key, model='text-embedding-
 
 # node 1 - LLM_1: generate outline of podcast script
 llm = ChatOpenAI(api_key=oai_api_key, model="gpt-4o-mini-2024-07-18")
-prompt1 = PromptTemplate.from_template("The following is text extracted from a pdf file (delimited by <pdf> XML tags). Please generate an outline for a podcast episode based on the topics from the pdf. The outline should include 3-5 key topics that flow naturally into one another, with a focus on maintaining audience engagement. \n--------------PDF--------------\n{pdf}\n--------------END PDF--------------")
+prompt1 = PromptTemplate.from_template("The following is text extracted from a pdf file (delimited by <pdf> XML tags). "
+                                       "Please generate an outline for a podcast episode based on the topics from the pdf. "
+                                       "The outline should include 3-5 key topics that flow naturally into one another, " 
+                                       "with a focus on maintaining audience engagement. "
+                                       "\n--------------PDF--------------\n{pdf}\n--------------END PDF--------------"
+                                       "Be sure to only include the outline in your response, since I am directly importing your response into another LLM to revise.")
 chain1 = prompt1 | llm | StrOutputParser()
 
 # node 2 - LLM_2: fill in dialogue segments of podcast outline
-prompt2 = PromptTemplate.from_template("Using the following outline: \n--------------OUTLINE--------------\n{outline}\n--------------END OUTLINE--------------\n Please generate a conversational podcast script where a host and a guest discuss each topic. Transitions between each topic should be seamless. The host should ask engaging, open-ended questions, and the guest should provide detailed yet conversational responses. Keep the tone light and accessible.")
+prompt2 = PromptTemplate.from_template("Using the following outline:" 
+                                       "\n--------------OUTLINE--------------\n{outline}\n--------------END OUTLINE--------------\n"
+                                       "Please generate a conversational podcast script where a host and a guest discuss each topic. " 
+                                       "Transitions between each topic should be seamless. The host should ask engaging, open-ended questions, " 
+                                       "and the guest should provide detailed yet conversational responses. Keep the tone light and accessible."
+                                       "Be sure to only include the script in your response, since I am directly importing your response into another LLM to revise.")
 chain2 = prompt2 | llm | StrOutputParser()
 
 # node 3 - LLM_3: enhance transitions of the podcast script
@@ -48,7 +58,11 @@ chain2 = prompt2 | llm | StrOutputParser()
 # chain3 = prompt3 | llm | StrOutputParser()
 
 # node 4 - LLM_4: enhance the overall tone of the podcast script
-prompt4 = PromptTemplate.from_template("Review the following script for a: \n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n Please polish the tone to make it more engaging. Add occasional humor, rhetorical questions, or personal anecdotes where appropriate to make the conversation feel more human and lively.")
+prompt4 = PromptTemplate.from_template("Review the following script for a podcast: "
+                                       "\n--------------SCRIPT--------------\n{script}\n--------------END SCRIPT--------------\n " 
+                                       "Please polish the tone to make it more engaging. Add occasional humor, rhetorical questions, " 
+                                       "or personal anecdotes where appropriate to make the conversation feel more human and lively."
+                                       "Be sure to only include the script in your response, since I am directly importing your response into another LLM to revise.")
 chain4 = prompt4 | llm | StrOutputParser()
 
 # get example pdf 'bodybuilding.txt' (hardcoded):
