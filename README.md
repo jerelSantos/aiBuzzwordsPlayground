@@ -183,3 +183,440 @@ Here's the output with the new prompt (and RAG):
 
 ## Closing Thoughts
 I think both the podcast and conversational method have their own pros and cons. In the future, I'll allow the user to dictate what tone they want (along with other keywords), and from there I'll place the keywords they choose into the prompt strategically.
+
+# 🤓 Solution 3: A Basic Chain
+[podcast_chain directory](podcast_chain)
+
+## Solution Summary:
+For this solution, I'm going to start learning LangChain. I'm going to assemble a very basic chain using it. Here's the graph:
+
+
+## 🔬 And the result is:
+Output of Node 1 (Create the outline):
+```
+### Podcast Episode Outline: "The Power of Motivation in Bodybuilding and Fitness"
+
+**Episode Title:** *"Muscle and Mind: Exploring Motivation in Bodybuilding"*
+
+---
+
+**Introduction (5 minutes)**  
+- Brief introduction of the host and the purpose of the episode.  
+- Overview of the importance of motivation in bodybuilding and fitness.  
+- Mention of the research study by Elena Mihăiță as a foundation for discussion.
+
+---
+
+**Topic 1: Understanding Bodybuilding and Fitness Motivation (10 minutes)**  
+- Discuss the various motivations for individuals to engage in bodybuilding and fitness (e.g., health, aesthetics, competition).  
+- Explore the psychological aspects of motivation, referencing self-determination theory.  
+- Share anecdotes or quotes from practitioners about their personal motivations.
+
+---
+
+**Topic 2: The Role of Training Routines in Sustaining Motivation (15 minutes)**  
+- Examine how structured training routines contribute to motivation and goal achievement.  
+- Discuss different training methods and their psychological impacts, such as weight increments and specialized routines (e.g., pyramidal training, circuit training).  
+- Highlight how the intensity and frequency of workouts can affect motivation levels and physical outcomes.
+
+---
+
+**Topic 3: Emotional Responses During Training (10 minutes)**  
+- Explore the emotions experienced by bodybuilders during training sessions (e.g., excitement, satisfaction, fatigue).  
+- Discuss the concept of "muscle fever" as a sign of effective training and its psychological implications.  
+- Invite listeners to reflect on their own emotional journeys in fitness and share stories.
+
+---
+
+**Topic 4: The Social Dynamics of Bodybuilding (10 minutes)**  
+- Discuss the influence of community and social interactions in gyms on motivation.  
+- Explore competition among peers and how it can drive individuals to push their limits.  
+- Share insights from the study on how group dynamics enhance or hinder motivation.
+
+---
+
+**Conclusion (5 minutes)**  
+- Recap the key points discussed in the episode.  
+- Encourage listeners to identify and reflect on their own motivations in fitness.  
+- Invite feedback and personal stories from listeners for future episodes.  
+- Announce the next episode's topic related to advanced training techniques or nutritional strategies.
+
+---
+
+**Outro (2 minutes)**  
+- Thank listeners for tuning in and remind them to subscribe for more insightful discussions on fitness and health.  
+- Provide social media handles for listeners to engage and share their thoughts.
+```
+
+Output of Node 2 (Adding dialogue):
+```
+**Podcast Episode Script: "Muscle and Mind: Exploring Motivation in Bodybuilding"**
+
+---
+
+**[INTRO MUSIC FADES OUT]**
+
+**Host:**  
+Welcome back, everyone, to another episode of "Muscle and Mind." I’m your host, [Your Name], and today we’re diving deep into a topic that resonates with anyone who’s ever lifted a weight or hit the gym—motivation in bodybuilding and fitness. 
+
+To help us explore this, I’m thrilled to welcome our guest, [Guest's Name], a seasoned bodybuilder and fitness coach with years of experience. Thanks for joining us today!
+
+**Guest:**  
+Thanks for having me, [Your Name]! I’m excited to chat about motivation—it's such a crucial part of the fitness journey.
+
+**Host:**  
+Absolutely! So, motivation is really the driving force behind why many of us engage in bodybuilding and fitness. Can you share what you think are some of the primary motivations that people have when they start this journey?
+
+**Guest:**  
+For sure! People come to bodybuilding for all sorts of reasons. Some want to improve their health—maybe they want to lose weight or manage a health condition. Others are drawn to aesthetics; they want to build muscle and look a certain way. And then there are those who thrive on competition—bodybuilding competitions are a huge motivator for many. 
+
+Psychologically, there’s also the concept of self-determination theory, which suggests that our motivations can be intrinsic, like the joy of lifting, or extrinsic, like wanting to impress others. It’s fascinating how varied our motivations can be!
+
+**Host:**  
+That’s a great point! I think everyone has their own unique story. Do you have any personal anecdotes or quotes from clients that highlight these motivations?
+
+**Guest:**  
+Absolutely! One of my clients once told me, “Every time I lift, I’m not just building muscle; I’m building confidence.” That really stuck with me. It shows how deeply intertwined our mental and physical journeys are.
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Now, let’s dive into our second topic: the role of training routines in sustaining motivation. How do you think structured training routines help people stay motivated?
+
+**Guest:**  
+Structured routines are essential! They provide a roadmap for progress. When you have a plan—whether it’s a specific lifting schedule or a nutrition plan—it makes the journey feel more manageable. 
+
+For instance, methods like pyramidal training or circuit training not only keep things interesting but also help track progress. Incremental weight increases can be incredibly motivating because they give tangible proof of growth and improvement. 
+
+**Host:**  
+I see what you mean. It’s like each small victory builds up to a bigger one. But what about the intensity and frequency of workouts? How do they play into motivation?
+
+**Guest:**  
+Great question! Intensity can really elevate your motivation levels. If you’re pushing yourself and feeling that “muscle fever,” it’s a sign you’re working hard. But if workouts are too frequent without sufficient recovery, it can lead to burnout. Finding the right balance is key to keeping that motivation alive!
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Speaking of emotions, let’s move on to our next topic: emotional responses during training. What kind of emotions do you typically see people experience during their workouts?
+
+**Guest:**  
+Oh, it’s a rollercoaster! Many feel excitement when they hit personal records or try new exercises. There’s also a lot of satisfaction when you complete a tough session, but fatigue and frustration can creep in too, especially on tough days. 
+
+Muscle fever is a unique experience; it’s that soreness you feel after a good workout, and it can actually boost your psychological satisfaction. It’s like a badge of honor!
+
+**Host:**  
+That’s a fascinating perspective! I think many listeners can relate to those ups and downs. How would you encourage them to reflect on their emotional journeys in fitness?
+
+**Guest:**  
+I’d suggest keeping a workout journal. Not just tracking weights and reps, but also jotting down how you feel before and after workouts. It can provide insights into your emotional patterns and help you understand what drives you.
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Now, let’s explore the social dynamics of bodybuilding. How do you see community and social interactions in the gym influencing motivation?
+
+**Guest:**  
+Community is huge! Having a support system can be incredibly motivating. When you’re surrounded by like-minded individuals, there’s a natural push to perform better. 
+
+Competition among peers can also drive you to new heights. It’s that friendly rivalry that makes you want to lift just a bit more or push through that last set. 
+
+**Host:**  
+That makes a lot of sense. In Mihăiță’s study, did they find that group dynamics enhance or hinder motivation?
+
+**Guest:**  
+Yes! The study highlighted that positive group dynamics enhance motivation. However, it can also go the other way—if the environment is overly competitive or negative, it can lead to feelings of inadequacy. So, a supportive gym culture is crucial!
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+As we wrap up, let’s recap what we’ve discussed today. We’ve explored the various motivations behind bodybuilding, the importance of structured training routines, the emotional rollercoaster of workouts, and the impact of community on motivation. 
+
+So, [Guest's Name], what would you encourage our listeners to do as they reflect on their own fitness journeys?
+
+**Guest:**  
+I encourage everyone to take a moment to think about what truly motivates them. Is it health, aesthetics, competition, or something else? Identifying that can help tailor your approach to fitness. 
+
+**Host:**  
+That’s fantastic advice! And we’d love to hear from our listeners. Share your stories and motivations with us, and you might just get featured in our next episode! 
+
+In our upcoming episode, we’ll dive into advanced training techniques and nutritional strategies to take your fitness journey to the next level. 
+
+---
+
+**[OUTRO MUSIC FADES IN]**
+
+**Host:**  
+Thank you for tuning in to "Muscle and Mind." If you enjoyed today’s conversation, be sure to subscribe for more insightful discussions on fitness and health. You can also follow us on social media at [Your Social Media Handles]. 
+
+Thanks again, [Guest's Name], for sharing your insights today!
+
+**Guest:**  
+Thank you for having me! It’s been a pleasure.
+
+**Host:**  
+Until next time, keep lifting and stay motivated! 
+
+**[OUTRO MUSIC FADES OUT]**
+```
+
+Output of Node 3 (Better transitions):
+```
+Sure! Here’s the revised podcast script with enhanced transitions that feel more natural and engaging:
+
+---
+
+**Podcast Episode Script: "Muscle and Mind: Exploring Motivation in Bodybuilding"**
+
+---
+
+**[INTRO MUSIC FADES OUT]**
+
+**Host:**  
+Welcome back, everyone, to another episode of "Muscle and Mind." I’m your host, [Your Name], and today we’re diving deep into a topic that resonates with anyone who’s ever lifted a weight or hit the gym—motivation in bodybuilding and fitness. 
+
+To help us explore this, I’m thrilled to welcome our guest, [Guest's Name], a seasoned bodybuilder and fitness coach with years of experience. Thanks for joining us today!
+
+**Guest:**  
+Thanks for having me, [Your Name]! I’m excited to chat about motivation—it's such a crucial part of the fitness journey.
+
+**Host:**  
+Absolutely! So, motivation is really the driving force behind why many of us engage in bodybuilding and fitness. Can you share what you think are some of the primary motivations that people have when they start this journey?
+
+**Guest:**  
+For sure! People come to bodybuilding for all sorts of reasons. Some want to improve their health—maybe they want to lose weight or manage a health condition. Others are drawn to aesthetics; they want to build muscle and look a certain way. And then there are those who thrive on competition—bodybuilding competitions are a huge motivator for many. 
+
+Psychologically, there’s also the concept of self-determination theory, which suggests that our motivations can be intrinsic, like the joy of lifting, or extrinsic, like wanting to impress others. It’s fascinating how varied our motivations can be!
+
+**Host:**  
+That’s a great point! I think everyone has their own unique story. Do you have any personal anecdotes or quotes from clients that highlight these motivations?
+
+**Guest:**  
+Absolutely! One of my clients once told me, “Every time I lift, I’m not just building muscle; I’m building confidence.” That really stuck with me. It shows how deeply intertwined our mental and physical journeys are.
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Having explored those diverse motivations, let’s shift gears a bit and talk about training routines. How do you think structured training routines help people stay motivated?
+
+**Guest:**  
+Structured routines are essential! They provide a roadmap for progress. When you have a plan—whether it’s a specific lifting schedule or a nutrition plan—it makes the journey feel more manageable. 
+
+For instance, methods like pyramidal training or circuit training not only keep things interesting but also help track progress. Incremental weight increases can be incredibly motivating because they give tangible proof of growth and improvement. 
+
+**Host:**  
+I see what you mean. It’s like each small victory builds up to a bigger one. But what about the intensity and frequency of workouts? How do they play into motivation?
+
+**Guest:**  
+Great question! Intensity can really elevate your motivation levels. If you’re pushing yourself and feeling that “muscle fever,” it’s a sign you’re working hard. But if workouts are too frequent without sufficient recovery, it can lead to burnout. Finding the right balance is key to keeping that motivation alive!
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Now that we’ve covered the importance of structure in training, let’s delve into the emotional side of workouts. What kind of emotions do you typically see people experience during their training sessions?
+
+**Guest:**  
+Oh, it’s a rollercoaster! Many feel excitement when they hit personal records or try new exercises. There’s also a lot of satisfaction when you complete a tough session, but fatigue and frustration can creep in too, especially on tough days. 
+
+Muscle fever is a unique experience; it’s that soreness you feel after a good workout, and it can actually boost your psychological satisfaction. It’s like a badge of honor!
+
+**Host:**  
+That’s a fascinating perspective! I think many listeners can relate to those ups and downs. How would you encourage them to reflect on their emotional journeys in fitness?
+
+**Guest:**  
+I’d suggest keeping a workout journal. Not just tracking weights and reps, but also jotting down how you feel before and after workouts. It can provide insights into your emotional patterns and help you understand what drives you.
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+As we navigate through these emotional landscapes, it’s also crucial to consider the social dynamics of bodybuilding. How do you see community and social interactions in the gym influencing motivation?
+
+**Guest:**  
+Community is huge! Having a support system can be incredibly motivating. When you’re surrounded by like-minded individuals, there’s a natural push to perform better. 
+
+Competition among peers can also drive you to new heights. It’s that friendly rivalry that makes you want to lift just a bit more or push through that last set. 
+
+**Host:**  
+That makes a lot of sense. In Mihăiță’s study, did they find that group dynamics enhance or hinder motivation?
+
+**Guest:**  
+Yes! The study highlighted that positive group dynamics enhance motivation. However, it can also go the other way—if the environment is overly competitive or negative, it can lead to feelings of inadequacy. So, a supportive gym culture is crucial!
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+As we draw our conversation to a close, let’s recap what we’ve discussed today. We’ve explored the various motivations behind bodybuilding, the importance of structured training routines, the emotional rollercoaster of workouts, and the impact of community on motivation. 
+
+So, [Guest's Name], what would you encourage our listeners to do as they reflect on their own fitness journeys?
+
+**Guest:**  
+I encourage everyone to take a moment to think about what truly motivates them. Is it health, aesthetics, competition, or something else? Identifying that can help tailor your approach to fitness. 
+
+**Host:**  
+That’s fantastic advice! And we’d love to hear from our listeners. Share your stories and motivations with us, and you might just get featured in our next episode! 
+
+In our upcoming episode, we’ll dive into advanced training techniques and nutritional strategies to take your fitness journey to the next level. 
+
+---
+
+**[OUTRO MUSIC FADES IN]**
+
+**Host:**  
+Thank you for tuning in to "Muscle and Mind." If you enjoyed today’s conversation, be sure to subscribe for more insightful discussions on fitness and health. You can also follow us on social media at [Your Social Media Handles]. 
+
+Thanks again, [Guest's Name], for sharing your insights today!
+
+**Guest:**  
+Thank you for having me! It’s been a pleasure.
+
+**Host:**  
+Until next time, keep lifting and stay motivated! 
+
+**[OUTRO MUSIC FADES OUT]**
+
+--- 
+
+This version introduces smoother and more engaging transitions, enhancing the flow of the conversation while keeping listeners captivated.
+```
+
+Output of Node 4 (Adding tone and style):
+```
+Certainly! Here’s a polished version of your podcast script with a more engaging tone, humor, and rhetorical questions to keep the conversation lively and relatable:
+
+---
+
+**Podcast Episode Script: "Muscle and Mind: Exploring Motivation in Bodybuilding"**
+
+---
+
+**[INTRO MUSIC FADES OUT]**
+
+**Host:**  
+Welcome back to another episode of "Muscle and Mind!" I’m your host, [Your Name], and today we’re diving into a topic that gets our hearts pumping and our muscles flexing—motivation in bodybuilding and fitness. 
+
+Joining me is a guest who knows the ins and outs of the gym like the back of his hand—[Guest's Name], a seasoned bodybuilder and fitness coach! Thanks for taking the time to be here today!
+
+**Guest:**  
+Thanks for having me, [Your Name]! I’m pumped to be here and chat about motivation—because let's be real, without it, we’d all just be lifting our remote controls instead of weights!
+
+**Host:**  
+Haha, so true! Motivation is the fuel that keeps our fitness engines running. What do you think drives people to start their bodybuilding journey? Is it the quest for superhero muscles or just the desire to look good in a swimsuit?
+
+**Guest:**  
+You hit the nail on the head! People come to bodybuilding for a variety of reasons. Some want to improve their health—like tackling that stubborn dad bod. Others are all about the aesthetics; they dream of those chiseled abs. And let’s not forget about the competition junkies—who doesn’t love a little friendly rivalry, right?
+
+And then there’s self-determination theory, which says our motivations can be intrinsic—like the sheer joy of lifting—or extrinsic, like wanting to impress that cute person at the gym. It’s a mixed bag of reasons that keep us coming back for more!
+
+**Host:**  
+It really is fascinating! I think everyone has their own unique story. Got any personal anecdotes or wisdom from your clients that highlight these motivations?
+
+**Guest:**  
+Absolutely! One of my clients once said, “Every time I lift, I’m not just building muscle; I’m building confidence.” That really struck a chord with me. It’s a perfect reminder that while we’re sculpting our bodies, we’re also shaping our minds.
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Now that we’ve tackled motivations, let’s shift gears to training routines. How do structured routines keep people motivated? Is it like having a GPS for your fitness journey?
+
+**Guest:**  
+Exactly! Structured routines are like a roadmap to your goals. Without a plan, you might end up just wandering around the gym, wondering if you should be lifting or doing yoga. 
+
+Whether it’s pyramidal training or circuit training, having a structure keeps things fresh and exciting. Plus, when you see those incremental weight increases, it’s like giving yourself a high-five. Who doesn’t love a good victory dance in the gym?
+
+**Host:**  
+I’m all for those victory dances! But what about the intensity and frequency of workouts? Can you overdo it and still stay motivated?
+
+**Guest:**  
+Oh, definitely! Intensity is like that spicy sauce you add to your meal—it can elevate the flavor, but too much can leave you gasping for water. Pushing yourself can skyrocket your motivation, but if you’re hitting the gym too often without enough recovery, burnout can sneak up on you like that annoying gym buddy who just won’t stop talking about their latest protein shake.
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+Speaking of emotional rollercoasters, let’s dive into the feelings that come with training. What kind of emotions do you typically see during workouts? Is it all sunshine and rainbows, or are there storm clouds lurking?
+
+**Guest:**  
+It’s a rollercoaster for sure! There’s excitement when hitting personal records, satisfaction after a tough session, and then... boom! Fatigue and frustration can creep in, especially on those days when you feel like a noodle instead of a bodybuilder. 
+
+But let’s talk about muscle fever—who doesn’t love that soreness after a good workout? It’s like wearing a badge of honor, reminding you that you crushed it!
+
+**Host:**  
+Absolutely! I think many listeners can relate to those ups and downs. How would you suggest they reflect on their emotional journeys in fitness?
+
+**Guest:**  
+I recommend keeping a workout journal—not just tracking weights and reps, but also jotting down how you feel before and after workouts. It’s like having a therapy session with yourself, and trust me, it can reveal some eye-opening insights!
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+As we navigate these emotional landscapes, let’s not forget the social dynamics at play. How do community and gym interactions influence motivation? Are we talking cheerleaders or rival gladiators here?
+
+**Guest:**  
+Community is everything! Having a support system is like having your own personal cheer squad. When you’re surrounded by like-minded folks, it naturally pushes you to perform better. 
+
+And let’s face it, a little friendly competition can be exhilarating. It’s that spark that makes you want to lift just a bit more or power through that last set. Who doesn’t want to impress their gym buddies?
+
+**Host:**  
+That makes total sense! Did Mihăiță’s study find that group dynamics enhance or hinder motivation?
+
+**Guest:**  
+Absolutely! The study revealed that positive group dynamics enhance motivation. But if you’re in a toxic, overly competitive environment, it can lead to feelings of inadequacy—like trying to bench press an elephant when you’re still working on those baby weights!
+
+---
+
+**[TRANSITION MUSIC]**
+
+**Host:**  
+As we wrap up our conversation, let’s recap what we’ve covered. We’ve explored motivations behind bodybuilding, the significance of structured training, the emotional highs and lows, and the impact of community on our drive to lift. 
+
+So, [Guest's Name], what final words of wisdom would you share with our listeners as they reflect on their fitness journeys?
+
+**Guest:**  
+I encourage everyone to take a moment and think about what truly motivates them. Is it health, aesthetics, competition, or maybe just a desire to eat an extra slice of pizza guilt-free? Identifying that can help tailor your fitness approach!
+
+**Host:**  
+Fantastic advice! And we want to hear from our listeners! Share your stories and motivations with us—who knows, you might just get featured in our next episode!
+
+Next week, we’ll be diving into advanced training techniques and nutritional strategies to elevate your fitness game. 
+
+---
+
+**[OUTRO MUSIC FADES IN]**
+
+**Host:**  
+Thanks for tuning in to "Muscle and Mind." If you enjoyed today’s conversation, don’t forget to subscribe for more insightful discussions on fitness and health. You can also follow us on social media at [Your Social Media Handles]. 
+
+Thanks again, [Guest's Name], for sharing your insights with us!
+
+**Guest:**  
+Thank you for having me! It’s been a blast.
+
+**Host:**  
+Until next time, keep lifting, stay motivated, and maybe do a little dance in the gym—just for fun!
+
+**[OUTRO MUSIC FADES OUT]**
+
+---
+
+This revised version adds a more conversational and humorous tone, making it more relatable and engaging for the listeners while maintaining the informative content of the original script.
+```
