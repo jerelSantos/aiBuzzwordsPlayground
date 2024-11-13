@@ -36,7 +36,7 @@ llm = ChatOpenAI(api_key=oai_api_key, model="gpt-4o-mini-2024-07-18")
 # vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 # node 1 - LLM_1: generate outline of podcast script
-prompt1 = PromptTemplate.from_template("The following is text extracted from a pdf file (delimited by <pdf> XML tags). "
+prompt1 = PromptTemplate.from_template("The following is text extracted from a pdf file. "
                                        "Please generate an outline for a podcast episode based on the topics from the pdf. "
                                        "The outline should include 3-5 key topics that flow naturally into one another, " 
                                        "with a focus on maintaining audience engagement. "
@@ -45,12 +45,12 @@ prompt1 = PromptTemplate.from_template("The following is text extracted from a p
 chain1 = prompt1 | llm | StrOutputParser() # basic chain for node 1: prompt -> llm -> string output
 
 # node 2 - LLM_2: fill in dialogue segments of podcast outline
-prompt2 = PromptTemplate.from_template("Using the following outline:" 
+prompt2 = PromptTemplate.from_template("Based on the following outline of topics:" 
                                        "\n--------------OUTLINE--------------\n{outline}\n--------------END OUTLINE--------------\n"
-                                       "Please generate a conversational podcast script where a host and a guest discuss each topic. " 
-                                       "Transitions between each topic should be seamless. The host should ask engaging, open-ended questions, " 
-                                       "and the guest should provide detailed yet conversational responses. Keep the tone light and accessible."
-                                       "Be sure to only include the script in your response, since I am directly importing your response into another LLM to revise.")
+                                       "You will create a transcript of a conversation between two people, person (2) who is an expert on a given topic and "
+                                       "person (1) who is interested in the topics person (2) is an expert in. Keep the conversation "
+                                       "between the two people relaxed and informal. It should sound like two friends just casually talking. "
+                                       "The conversation should NOT sound like a question and answer panel.")
 chain2 = prompt2 | llm | StrOutputParser() # basic chain for node 2: output of node1 -> llm -> string output
 
 # node 3 - LLM_3: enhance transitions of the podcast script
